@@ -4,6 +4,7 @@ import com.example.reviewMember.member.domain.Member;
 import com.example.reviewMember.member.domain.MemberRepository;
 import com.example.reviewMember.member.domain.common.Role;
 import com.example.reviewMember.member.presentation.LoginRequest;
+import com.example.reviewMember.member.presentation.MemberInfoRequest;
 import com.example.reviewMember.member.presentation.UserInfoRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,11 +24,27 @@ public class MemberService {
                 .password(passwordEncoder.encode(userInfoRequest.getPassword()))
                 .dept(userInfoRequest.getDept())
                 .status(Role.REGISTERED)
+                .manage(userInfoRequest.getManage())
                 .build();
 
         return memberRepository.save(entity);
     }
     public Member login(LoginRequest loginRequest) {
         return memberRepository.findByEmailAndPasswordOrderByIdDesc(loginRequest.getEmail(), loginRequest.getPassword());
+    }
+
+    public Member update(MemberInfoRequest memberInfoRequest) {
+
+        var entity = Member.builder()
+                .id(memberInfoRequest.getId())
+                .email(memberInfoRequest.getEmail())
+                .name(memberInfoRequest.getName())
+                .password(passwordEncoder.encode(memberInfoRequest.getPassword()))
+                .dept(memberInfoRequest.getDept())
+                .status(Role.REGISTERED)
+                .manage(memberInfoRequest.getManage())
+                .build();
+
+        return memberRepository.save(entity);
     }
 }

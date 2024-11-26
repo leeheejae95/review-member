@@ -24,7 +24,7 @@ public class SpringSecurityConfig {
         http
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers("/member/login", "/member").anonymous() // url 허용
+                                .requestMatchers("/member/login", "/member","/member/memberUpdate").anonymous() // url 허용
                                 .requestMatchers("/member/**").hasRole("REGISTERED")
                                 .anyRequest().permitAll() // 그 외 모든 요청은 인증 사용
                 );
