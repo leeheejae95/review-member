@@ -1,14 +1,13 @@
 package com.example.reviewMember.member.domain;
 
+import com.example.reviewMember.member.domain.common.Role;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,9 +20,16 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
     private String email;
+
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role status;
+
+    private String dept;
+
+    private String manage;
 }

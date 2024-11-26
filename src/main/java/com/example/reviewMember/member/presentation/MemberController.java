@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/member")
 @RequiredArgsConstructor
@@ -16,13 +14,18 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("")
-    public ResponseEntity<Member> create(@RequestBody UserInfoRequest userInfoRequest) {
-
-        return ResponseEntity.ok(memberService.create(userInfoRequest));
+    public ResponseEntity<Member> register(@RequestBody UserInfoRequest userInfoRequest) {
+        return ResponseEntity.ok(memberService.register(userInfoRequest));
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<Optional<Member>> findUser(@RequestBody UserInfoRequest userInfoRequest) {
-        return ResponseEntity.ok(memberService.findId(userInfoRequest));
+    @PostMapping("/login")
+    public ResponseEntity<Member> login(@RequestBody LoginRequest loginRequest) {
+        return ResponseEntity.ok(memberService.login(loginRequest));
     }
+
+    @PostMapping("/test")
+    public ResponseEntity<Member> test(@RequestBody LoginRequest loginRequest) {
+        return ResponseEntity.ok(memberService.login(loginRequest));
+    }
+
 }

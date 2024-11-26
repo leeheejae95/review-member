@@ -1,11 +1,9 @@
 package com.example.reviewMember.member.presentation;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,4 +11,8 @@ public final class UserInfoResponse {
 
     private String name;
     private String email;
+    private String password;
+    private String role;
+    private String dept;
+    private String manage;
 }
