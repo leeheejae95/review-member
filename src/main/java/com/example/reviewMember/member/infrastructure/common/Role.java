@@ -1,4 +1,4 @@
-package com.example.reviewMember.member.domain.common;
+package com.example.reviewMember.member.infrastructure.common;
 
 import lombok.Getter;
 

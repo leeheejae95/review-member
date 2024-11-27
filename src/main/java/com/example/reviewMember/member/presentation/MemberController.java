@@ -2,9 +2,8 @@ package com.example.reviewMember.member.presentation;
 
 import com.example.reviewMember.member.application.MemberService;
 import com.example.reviewMember.member.domain.Member;
-import com.example.reviewMember.member.domain.api.Api;
+import com.example.reviewMember.member.infrastructure.api.Api;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,24 +13,37 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("")
+    @PostMapping(value = "", name = "회원가입")
     public Api<Member> register(@RequestBody UserInfoRequest userInfoRequest) {
         return Api.OK(memberService.register(userInfoRequest));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Member> login(@RequestBody LoginRequest loginRequest) {
-        return ResponseEntity.ok(memberService.login(loginRequest));
+    @PostMapping(value = "/login", name = "로그인")
+    public Api<Object> login(@RequestBody LoginRequest loginRequest) {
+        return Api.OK(memberService.login(loginRequest));
     }
 
-    @PostMapping("/memberUpdate")
-    public ResponseEntity<Member> memberUpdate(@RequestBody MemberInfoRequest memberInfoRequest) {
-        return ResponseEntity.ok(memberService.update(memberInfoRequest));
+    @PostMapping(value = "/memberUpdate", name = "회원정보 수정")
+    public Api<Member> memberUpdate(@RequestBody MemberInfoRequest memberInfoRequest) {
+        return Api.OK(memberService.update(memberInfoRequest));
     }
 
-    @PostMapping("/test")
-    public ResponseEntity<Member> test(@RequestBody LoginRequest loginRequest) {
-        return ResponseEntity.ok(memberService.login(loginRequest));
+    @PostMapping(value = "/test", name = "시큐리티 테스트")
+    public Api<Object> test(@RequestBody LoginRequest loginRequest) {
+        return Api.OK(memberService.login(loginRequest));
     }
 
+    @GetMapping(value = "/test2", name = "에러코드 테스트")
+    public Api<LoginResponse> test() {
+
+        var response = LoginResponse.builder()
+                .name("홍길동")
+                .email("test@test.com")
+                .build();
+
+        var str = "어렵다...";
+        var age = Integer.parseInt(str);
+
+        return Api.OK(response);
+    }
 }

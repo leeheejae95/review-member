@@ -1,6 +1,6 @@
 package com.example.reviewMember.member.domain;
 
-import com.example.reviewMember.member.domain.common.Role;
+import com.example.reviewMember.member.infrastructure.common.Role;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.*;
